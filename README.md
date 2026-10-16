@@ -6,25 +6,6 @@ Smooth Step Camera is a client-side Fabric mod for Minecraft Java 26.3. It smoot
 
 ![Camera comparison: without the mod on the left, with the mod on the right](assets/comparison.gif)
 
-The comparison shows the same staircase in first person. Left: **WITHOUT MOD**. Right: **WITH MOD**.
-
-## Requirements
-
-| Component | Version |
-| --- | --- |
-| Minecraft Java Edition | 26.3 |
-| Mod loader | Fabric Loader 0.19.5 or newer |
-| Java | 25 or newer |
-| Installation | Client |
-
-Fabric API is not required by Smooth Step Camera. Install the mod on your client; servers do not need it.
-
-## Installation
-
-1. Set up a Minecraft 26.3 profile with Fabric Loader.
-2. Download `smooth-step-camera-fabric-26.3-1.0.0.jar` and put it in that profile's `mods` folder.
-3. Launch the game.
-
 ## Camera behavior
 
 The mod smooths height changes up to **0.6 blocks**. You keep the same player movement, collision box, and interaction reach.
