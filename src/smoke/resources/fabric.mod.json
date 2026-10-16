@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "smoothstepcamera_smoke",
+  "version": "1.0.0",
+  "name": "Smooth Step Camera transformation tests",
+  "environment": "client",
+  "entrypoints": {
+    "preLaunch": ["dev.smoothstepcamera.smoke.SmokeEntrypoint"]
+  },
+  "depends": {
+    "smoothstepcamera": "*"
+  }
+}

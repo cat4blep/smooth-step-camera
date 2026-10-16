@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "smoothstepcamera",
+  "version": "${version}",
+  "name": "Smooth Step Camera",
+  "description": "Smooth camera height changes on slabs and stairs in first and third person, including Shoulder Surfing Reloaded.",
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.smoothstepcamera.SmoothStepCameraClient"]
+  },
+  "mixins": ["smoothstepcamera.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "java": ">=25"
+  },
+  "suggests": {
+    "shouldersurfing": "*"
+  }
+}

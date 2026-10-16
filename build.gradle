@@ -1,0 +1,72 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+base { archivesName = project.archives_base_name }
+
+// Unobfuscated Minecraft 26.3 uses the standard implementation configuration.
+// https://github.com/FabricMC/fabric-example-mod/blob/26.3/build.gradle
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.14.1'
+}
+
+sourceSets {
+    smoke {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+
+// This fixture verifies mixin transformation before Minecraft creates a window.
+// It is a separate mod and is never included in the distributable jar.
+// https://docs.fabricmc.net/develop/loom/options
+loom {
+    mods {
+        smoothstepcamera { sourceSet sourceSets.main }
+        smoothstepcamera_smoke { sourceSet sourceSets.smoke }
+    }
+    runs {
+        smokeClient {
+            client()
+            sourceSet = sourceSets.smoke.name
+            runDirectory = file('build/smoke')
+            jvmArguments.add('-Dmixin.debug.export=true')
+            jvmArguments.add('-Dmixin.debug.export.decompile=false')
+        }
+    }
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    def modVersion = project.version.toString()
+    inputs.property 'version', modVersion
+    filesMatching('fabric.mod.json') {
+        expand version: modVersion
+    }
+}
+
+test { useJUnitPlatform() }
+
+jar {
+    from('LICENSE') { rename { 'LICENSE_smooth-step-camera' } }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}

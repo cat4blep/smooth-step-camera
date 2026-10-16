@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.smoothstepcamera.mixin",
+  "plugin": "dev.smoothstepcamera.CompatibilityMixinPlugin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "LocalPlayerMixin",
+    "CameraMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
